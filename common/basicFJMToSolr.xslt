@@ -1782,7 +1782,7 @@ WHERE {
           <xsl:value-of select="text()"/>
       </field>
     </xsl:template>
-    
+   
     <xsl:template match="eac-cpf:eac-cpf">
       <xsl:param name="prefix">eaccpf_</xsl:param>
       <xsl:param name="suffix">_es</xsl:param> <!-- 'edged' (edge n-gram) string (copied to *_et text)

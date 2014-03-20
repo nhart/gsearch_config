@@ -24,7 +24,7 @@
   xmlns:xlink="http://www.w3.org/1999/xlink">
   <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
   
-  <xsl:include href="file:///usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/common/basicFJMToSolr.xslt"/>
+  <!--<xsl:include href="file:///usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/common/basicFJMToSolr.xslt"/>-->
   <xsl:include href="file:///usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/common/escape_xml.xslt"/>
   <xsl:include href="file:///usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/common/mods_to_solr_fields.xslt"/>
 
@@ -428,4 +428,64 @@ WHERE {
       <xsl:value-of select="text()"/>
     </field>
   </xsl:template>
+
+    <xsl:variable name="debug" select="false"/>
+
+    <xsl:template name="perform_query" xmlns:encoder="xalan://java.net.URLEncoder">
+        <xsl:param name="query"/>
+        <xsl:param name="lang">itql</xsl:param>
+        <xsl:param name="additional_params"/>
+            <!-- FIXME:  Should probably get these as parameters, or sommat -->
+        <xsl:param name="HOST">localhost</xsl:param>
+        <xsl:param name="PORT">8080</xsl:param>
+        <xsl:param name="PROT">http</xsl:param>
+        <xsl:param name="URLBASE" select="concat($PROT, '://', $HOST, ':', $PORT, '/')"/>
+        <xsl:param name="REPOSITORYNAME" select="'fedora'"/>
+        <xsl:param name="RISEARCH" select="concat($URLBASE, 'fedora/risearch',
+          '?type=tuples&amp;flush=TRUE&amp;format=Sparql&amp;query=')" />
+
+        <xsl:variable name="encoded_query" select="encoder:encode(normalize-space($query))"/>
+
+        <xsl:variable name="query_url" select="concat($RISEARCH, $encoded_query, '&amp;lang=', $lang,  $additional_params)"/>
+        <?xalan-doc-cache-off?>
+        <xsl:copy-of select="document($query_url)"/>
+        <!-- Doesn't work, as I input this into a variable...  Blargh
+        <xsl:comment>
+            <xsl:value-of select="$full_query"/>
+        </xsl:comment>
+        <xsl:copy-of select="$full_query"/>-->
+    </xsl:template>
+
+    <xsl:template name="get_ISO8601_date" xmlns:java="http://xml.apache.org/xalan/java">
+      <xsl:param name="date"/>
+
+      <xsl:variable name="frac">([.,][0-9]+)</xsl:variable>
+      <xsl:variable name="sec_el">(\:[0-9]{2}<xsl:value-of select="$frac"/>?)</xsl:variable>
+      <xsl:variable name="min_el">(\:[0-9]{2}(<xsl:value-of select="$frac"/>|<xsl:value-of select="$sec_el"/>))</xsl:variable>
+      <xsl:variable name="time_el">([0-9]{2}(<xsl:value-of select="$frac"/>|<xsl:value-of select="$min_el"/>))</xsl:variable>
+      <xsl:variable name="time_offset">(Z|[+-]<xsl:value-of select="$time_el"/>)</xsl:variable>
+      <xsl:variable name="time_pattern">T<xsl:value-of select="$time_el"/><xsl:value-of select="$time_offset"/>?</xsl:variable>
+
+      <xsl:variable name="day_el">(-[0-9]{2})</xsl:variable>
+      <xsl:variable name="month_el">(-[0-9]{2}<xsl:value-of select="$day_el"/>?)</xsl:variable>
+      <xsl:variable name="date_el">([0-9]{4}<xsl:value-of select="$month_el"/>?)</xsl:variable>
+      <xsl:variable name="date_opt_pattern">(<xsl:value-of select="$date_el"/><xsl:value-of select="$time_pattern"/>?)</xsl:variable>
+      <xsl:variable name="pattern">(<xsl:value-of select="$time_pattern"/>|<xsl:value-of select="$date_opt_pattern"/>)</xsl:variable>
+
+      <xsl:if test="$debug">
+        <xsl:message>Date to parse: <xsl:value-of select="$date"/></xsl:message>
+      </xsl:if>
+      <xsl:if test="java:matches(string($date), $pattern)">
+        <xsl:if test="$debug">
+          <xsl:message>Parsing: <xsl:value-of select="$date"/></xsl:message>
+        </xsl:if>
+        <!--  XXX: need to add the joda jar to the lib directory to make work? -->
+        <xsl:variable name="dp" select="java:org.joda.time.format.ISODateTimeFormat.dateTimeParser()"/>
+        <xsl:variable name="parsed" select="java:parseDateTime($dp, $date)"/>
+
+        <xsl:variable name="f" select="java:org.joda.time.format.ISODateTimeFormat.dateTime()"/>
+        <xsl:variable name="df" select="java:withZoneUTC($f)"/>
+        <xsl:value-of select="java:print($df, $parsed)"/>
+      </xsl:if>
+    </xsl:template>
 </xsl:stylesheet>
