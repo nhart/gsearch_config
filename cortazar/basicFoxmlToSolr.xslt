@@ -57,7 +57,7 @@
 	<!-- RELS-EXT -->
   <xsl:template match="rdf:RDF">
     <xsl:param name="prefix">rels-ext_</xsl:param>
-    <xsl:param name="suffix">_s</xsl:param>
+    <xsl:param name="suffix">_ms</xsl:param>
     
     <xsl:for-each select=".//rdf:Description/*[not(@rdf:resource)][normalize-space(text())]">
       <field>
