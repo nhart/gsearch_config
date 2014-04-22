@@ -26,9 +26,9 @@
   
   <xsl:include href="file:/var/www/html/drupal/sites/all/modules/islandora_fjm/xsl/basicFJMToSolr.xslt"/>
   <xsl:include href="file:/var/www/html/drupal/sites/all/modules/islandora_fjm/xsl/escape_xml.xslt"/>
-  <xsl:include href="file:/usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/gsearch_solr/mods_to_solr_fields.xslt"/>
+  <xsl:include href="file:/usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/gsearch_solr/mods_to_solr_fields.xslt"/>
 
-  <xsl:param name="REPOSITORYNAME" select="repositoryName"/>
+  <!-- <xsl:param name="REPOSITORYNAME" select="repositoryName"/> -->
   <xsl:param name="FEDORASOAP" select="repositoryName"/>
   <xsl:param name="FEDORAUSER" select="repositoryName"/>
   <xsl:param name="FEDORAPASS" select="repositoryName"/>
@@ -107,7 +107,7 @@
   <xsl:template match="/foxml:digitalObject" mode="activeFedoraObject">
     <xsl:param name="PID"/>
 
-    <field name="PID" boost="2.5">
+    <field name="PID">
       <xsl:value-of select="$PID"/>
     </field>
     

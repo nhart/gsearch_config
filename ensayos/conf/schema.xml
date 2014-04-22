@@ -387,10 +387,11 @@
 
 		
 		<dynamicField name="*_i"  type="sint"    indexed="true"  stored="true" multiValued="true"/>		
-		<dynamicField name="*_s"  type="string"  indexed="true"  stored="true" multiValued="true"/>
+		<dynamicField name="*_s"  type="string"  indexed="true"  stored="true" multiValued="false"/>
 		<dynamicField name="*_ms"  type="string"  indexed="true"  stored="true" multiValued="true"/>
 		<dynamicField name="*_es" type="string" indexed="true" stored="true"/>
 		<dynamicField name="*_mlt" type="mappedLowerText" indexed="true" stored="true" multiValued="true"/> 
+                 <dynamicField name="*_dt"  type="date"  indexed="true"  stored="true" multiValued="false"/>
 
         <!-- ************************end of unanalyzed *******************-->
 		<!--copyField source="*" dest="*_s"/-->
