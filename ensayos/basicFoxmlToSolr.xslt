@@ -26,7 +26,7 @@
   
   <xsl:include href="file:/var/www/html/drupal/sites/all/modules/islandora_fjm/xsl/basicFJMToSolr.xslt"/>
   <xsl:include href="file:/var/www/html/drupal/sites/all/modules/islandora_fjm/xsl/escape_xml.xslt"/>
-  <xsl:include href="file:/usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/gsearch_solr/mods_to_solr_fields.xslt"/>
+  <xsl:include href="file:/usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/default/mods_to_solr_fields.xslt"/>
 
   <!-- <xsl:param name="REPOSITORYNAME" select="repositoryName"/> -->
   <xsl:param name="FEDORASOAP" select="repositoryName"/>

@@ -24,7 +24,6 @@
   xmlns:xlink="http://www.w3.org/1999/xlink">
   <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
   
-  <!--<xsl:include href="file:///usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/config/index/common/basicFJMToSolr.xslt"/>-->
   <xsl:include href="file:///usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/common/escape_xml.xslt"/>
   <xsl:include href="file:///usr/local/fedora/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal/index/common/mods_to_solr_fields.xslt"/>
 

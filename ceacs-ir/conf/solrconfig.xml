@@ -369,48 +369,10 @@
      <float name="tie">0.01</float>
      <str name="qf">
         PID^16.0
-        atm_concert_cycle_mt^4.0
-        <!--atm_program_author_mt^5.0
-        atm_performer_concert_title_mt^5.0
-        atm_score_title_mt^8.0
-        atm_performer_piece_title_mt^8.0
-        atm_performer_name_mt^5.0
-        atm_program_concert_title_mt^5.0
-        atm_performance_concert_name_mt^5.0
-        atm_program_titn_mt^10.0-->
-        atm_concert_program_titn_mt^10.0
-        <!--atm_performer_group_mt^5.0-->
-        atm_concert_group_mt^5.0
-        atm_concert_piece_mt^8.0
-        <!--atm_performer_instrument_mt^2.0
-        atm_score_composer_mt^5.0-->
-        atm_concert_player_mt^4.0
-        <!--atm_score_titn_mt^10.0
-        atm_performance_concert_cycle_mt^4.0
-        atm_performer_concert_cycle_mt^4.0
-        atm_performance_composer_name_mt^5.0
-        atm_performance_player_mt^3.0
-        atm_performance_piece_title_mt^5.0
-        atm_performance_movement_mt^2.0
-        atm_performance_inst_mt^4.0-->
-        atm_concert_composer_mt^5.0
-        atm_concert_instrument_mt^4.0
-        atm_concert_title_mt^5.0
-     </str>
-     <str name="fl">
         * score
-     </str>
-     <str name="sort">
-       atm_type_s asc,
-       <!-- atm_concert_date_dt desc, nelson standard isn't used dt has multivalues -->
-       atm_eaccpf_surname_s desc,
-       atm_facet_concert_title_s asc
      </str>
     </lst>
     <lst name="appends">
-        <str name="q.alt">
-            atm_type_s:"Concert"
-        </str>
     </lst>
   </requestHandler>
 
@@ -472,7 +434,6 @@
      </str>
      <str name="fl">PID eaccpf_complete_et</str>
      <int name="ps">100</int>
-     <str name="fq">rels_hasModel_ms:"atm:personCModel"</str>
      <str name="sort">score desc</str>
      <str name="hl">true</str>
      <str name="hl.fl">eaccpf_complete_et</str>
