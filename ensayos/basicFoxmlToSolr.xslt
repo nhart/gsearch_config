@@ -73,8 +73,7 @@
             <xsl:when test="starts-with($PID, 'jt')"/>
             <xsl:when test="starts-with($PID, 'ir')"/>
             <xsl:when test="starts-with($PID, 'cam')"/>
-			<xsl:when test="starts-with($PID, 'cat')"/>
-            <xsl:otherwise>
+            <xsl:when test="starts-with($PID, 'ens')">
               <doc>
                 <xsl:choose>
                   <xsl:when test="foxml:digitalObject/foxml:objectProperties/foxml:property[@VALUE='Active']">
@@ -98,7 +97,7 @@
                   </xsl:otherwise>
                 </xsl:choose>
               </doc>
-            </xsl:otherwise>
+            </xsl:when>
           </xsl:choose>
         </xsl:if>
       </xsl:if>
